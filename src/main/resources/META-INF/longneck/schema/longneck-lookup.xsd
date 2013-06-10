@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           xmlns:tns="urn:hu.sztaki.ilab.longneck:1.0"
+           targetNamespace="urn:hu.sztaki.ilab.longneck:1.0" 
+           elementFormDefault="qualified">
+
+  <!-- DictionaryFile source -->
+  <xs:element name="dictionary-file-source" type="tns:dictionaryFileSourceType" substitutionGroup="tns:abstract-source" />
+
+  <!-- DictionaryFile attribute group -->
+  <xs:attributeGroup name="dictionaryFileAccessorAttrGroup">
+    <xs:attribute name="source-file" type="xs:string" use="required"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="dictionaryFileSourceType">
+    <xs:complexContent>
+      <xs:extension base="tns:sourceType">
+        <xs:attributeGroup ref="tns:dictionaryFileAccessorAttrGroup"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- WordsetFile source -->
+  <xs:element name="wordset-file-source" type="tns:wordsetFileSourceType" substitutionGroup="tns:abstract-source" />
+
+  <!-- DictionaryFile attribute group -->
+  <xs:attributeGroup name="wordsetFileAccessorAttrGroup">
+    <xs:attribute name="source-file" type="xs:string" use="required"/>
+  </xs:attributeGroup>
+
+  <xs:complexType name="wordsetFileSourceType">
+    <xs:complexContent>
+      <xs:extension base="tns:sourceType">
+        <xs:attributeGroup ref="tns:wordsetFileAccessorAttrGroup"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- LOOKUP -->
+
+  <!-- main lookup type -->
+  <xs:complexType name="lookupType">
+    <xs:complexContent>
+      <xs:extension base="tns:atomicConstraintType">
+        <xs:sequence>
+          <xs:element ref="tns:abstract-wordset" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="lookup" type="tns:lookupType" substitutionGroup="tns:abstract-constraint"/>
+
+  <!-- abstract wordset -->
+  <xs:complexType name="abstractWordsetType"/>
+  <xs:element name="abstract-wordset" type="tns:abstractWordsetType" abstract="true"/>
+
+  <!-- inline wordset -->
+  <xs:complexType name="inlineWordsetType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractWordsetType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:element ref="tns:w"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="inline-wordset" type="tns:inlineWordsetType" substitutionGroup="tns:abstract-wordset"/>
+
+  <!-- word element for inline wordset -->
+  <xs:element name="w" type="xs:string"/>
+
+  <!-- external wordset -->
+  <xs:complexType name="externalWordsetType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractWordsetType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element ref="tns:abstract-source"/>
+        </xs:sequence>
+        <xs:attribute name="column-name" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="external-wordset" type="tns:externalWordsetType" substitutionGroup="tns:abstract-wordset"/>
+
+  <!-- TRANSLATE -->
+
+  <!-- main translate type -->
+  <xs:complexType name="translateType">
+    <xs:complexContent>
+      <xs:extension base="tns:atomicBlockType">
+        <xs:sequence>
+          <xs:element ref="tns:abstract-dictionary"/>
+        </xs:sequence>
+        <xs:attribute name="from" type="tns:identifierType"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="translate" type="tns:translateType" substitutionGroup="tns:abstract-block"/>
+
+ <!-- translate cache type -->
+  <xs:complexType name="translateCacheType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractBlockType">
+        <xs:sequence>
+          <xs:element ref="tns:translate"/>
+        </xs:sequence>
+        <xs:attribute name="size" type="xs:integer" />
+       </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="translate-cache" type="tns:translateCacheType" substitutionGroup="tns:abstract-block"/>
+
+  <!-- abstract dictionary -->
+  <xs:complexType name="abstractDictionaryType"/>
+  <xs:element name="abstract-dictionary" type="tns:abstractDictionaryType" abstract="true"/>
+
+  <!-- inline dictionary -->
+  <xs:complexType name="inlineDictionaryType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractDictionaryType">
+        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+          <xs:element ref="tns:di"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="inline-dictionary" type="tns:inlineDictionaryType" substitutionGroup="tns:abstract-dictionary"/>
+
+  <!-- dictionary item -->
+  <xs:complexType name="inlineDictionaryItemType">
+    <xs:sequence>
+      <xs:element ref="tns:key"/>
+      <xs:element ref="tns:val"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="di" type="tns:inlineDictionaryItemType"/>
+
+  <!-- Key type for inline dictionary-->
+  <xs:attributeGroup name="keyRegexpAttrGroup">
+    <xs:attribute name="regexp" type="xs:boolean" default="false" />
+  </xs:attributeGroup>
+  <xs:complexType name="keyType" mixed="true">
+    <xs:attributeGroup ref="tns:keyRegexpAttrGroup" />
+  </xs:complexType>
+
+  <!-- key word element for inline dictionary -->
+  <xs:element name="key" type="tns:keyType"/>
+
+  <!-- value word element for inline dictionary -->
+  <xs:element name="val" type="xs:string"/>
+
+  <!-- external dictionary -->
+  <xs:complexType name="externalDictionaryType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractDictionaryType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element ref="tns:abstract-source"/>
+        </xs:sequence>
+        <xs:attribute name="key-column-name" type="xs:string"/>
+        <xs:attribute name="key-type-column-name" type="xs:string"/>
+        <xs:attribute name="value-column-name" type="xs:string"/>
+        <xs:attribute name="use-source-order" type="xs:boolean" default="false"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="external-dictionary" type="tns:externalDictionaryType" substitutionGroup="tns:abstract-dictionary"/>
+
+  <!-- regexp dictionary -->
+  <xs:complexType name="regexpDictionaryType">
+    <xs:complexContent>
+      <xs:extension base="tns:abstractDictionaryType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+          <xs:element ref="tns:abstract-dictionary"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="regexp-dictionary" type="tns:regexpDictionaryType" substitutionGroup="tns:abstract-dictionary"/>
+
+</xs:schema>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary-elements xmlns="urn:hu.sztaki.ilab.longneck:1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="urn:hu.sztaki.ilab.longneck:1.0 ../../main/resources/META-INF/longneck/schema/dictionaryFileSource.xsd">
+
+  <element>
+    <key regexp="true">.*(testkey[134]).*</key>
+    <val>$1</val>
+  </element>
+
+  <element>
+    <key>testkey2</key>
+    <val>value2</val>
+  </element>
+</dictionary-elements>

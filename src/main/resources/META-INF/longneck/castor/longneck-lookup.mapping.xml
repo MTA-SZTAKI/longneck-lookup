@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c:mapping xmlns:c="http://castor.exolab.org/"
+           xmlns:l="urn:hu.sztaki.ilab.longneck:1.0">
+
+  <!-- DictionaryFile source -->
+  <c:class name="hu.sztaki.ilab.longneck.process.access.DictionaryFileSource">
+    <c:map-to xml="dictionary-file-source" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+      <c:field name="sourceFile" type="string" required="true">
+      <c:bind-xml name="source-file" node="attribute" />
+    </c:field>
+  </c:class>
+
+  <!-- WordsetFile source -->
+  <c:class name="hu.sztaki.ilab.longneck.process.access.WordsetFileSource">
+    <c:map-to xml="wordset-file-source" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+      <c:field name="sourceFile" type="string" required="true">
+      <c:bind-xml name="source-file" node="attribute" />
+    </c:field>
+  </c:class>
+
+  <!-- Lookup -->
+  <c:class name="hu.sztaki.ilab.longneck.process.constraint.Lookup"
+           extends="hu.sztaki.ilab.longneck.process.constraint.AbstractAtomicConstraint">
+    <c:map-to xml="lookup" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="words" type="hu.sztaki.ilab.longneck.process.constraint.Wordset" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+  </c:class>
+
+  <!-- inline wordset with words -->
+  <c:class name="hu.sztaki.ilab.longneck.process.constraint.InlineWordset">
+    <c:map-to xml="inline-wordset" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="words" type="java.lang.String" collection="sortedset" required="true">
+      <c:bind-xml node="element" name="w"/>
+    </c:field>
+  </c:class>
+
+  <!-- external wordset -->
+  <c:class name="hu.sztaki.ilab.longneck.process.constraint.ExternalWordset">
+    <c:map-to xml="external-wordset" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="source" type="hu.sztaki.ilab.longneck.process.access.Source" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+    <c:field name="columnName" type="string" required="true">
+      <c:bind-xml name="column-name" node="attribute"/>
+    </c:field>
+  </c:class>
+
+  <!-- Translate -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.Translate"
+           extends="hu.sztaki.ilab.longneck.process.block.AbstractAtomicBlock">
+    <c:map-to xml="translate" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="from" type="string" required="true">
+      <c:bind-xml name="from" node="attribute"/>
+    </c:field>
+    <c:field name="dictionary" type="hu.sztaki.ilab.longneck.process.block.Dictionary" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+  </c:class>
+
+  <!-- Translate cache -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.TranslateCache"
+           extends="hu.sztaki.ilab.longneck.process.AbstractSourceInfoContainer">
+    <c:map-to xml="translate-cache" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="translate" type="hu.sztaki.ilab.longneck.process.block.Translate" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+    <c:field name="size" type="integer" >
+      <c:bind-xml name="size" node="attribute" type="integer"/>
+    </c:field>
+  </c:class>
+
+  <!-- inline dictionary with key-val words -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.InlineDictionary">
+    <c:map-to xml="inline-dictionary" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="items" collection="collection" required="true" get-method="getItemsCopy" set-method="addItem" type="hu.sztaki.ilab.longneck.process.block.DictItem">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+  </c:class>
+
+  <!-- dictionary item: key-value pair -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.DictItem">
+    <c:map-to xml="di" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="key" type="hu.sztaki.ilab.longneck.process.block.KeyType" get-method="getKeyType" set-method="setKeyType">
+      <c:bind-xml name="keyType" node="element"/>
+    </c:field>
+    <c:field name="value" type="java.lang.String" get-method="getValue" set-method="setValue">
+      <c:bind-xml name="val" node="element"/>
+    </c:field>
+  </c:class>
+
+  <c:class name="hu.sztaki.ilab.longneck.process.block.KeyType">
+    <c:map-to xml="key" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="keyContent" type="java.lang.String" get-method="getKeyContent" set-method="setKeyContent">
+      <c:bind-xml node="text"/>
+    </c:field>
+    <c:field name="regexp" type="boolean">
+      <c:bind-xml name="regexp" node="attribute"/>
+    </c:field>
+    <c:field name="compiledKey" type="java.util.regex.Pattern">
+      <c:bind-xml transient="true"/>
+    </c:field>
+  </c:class>
+
+  <!-- external dictionary -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.ExternalDictionary">
+    <c:map-to xml="external-dictionary" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="source" type="hu.sztaki.ilab.longneck.process.access.Source" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+    <c:field name="keyColumnName" type="string" required="true">
+      <c:bind-xml name="key-column-name" node="attribute"/>
+    </c:field>
+    <c:field name="valueColumnName" type="string" required="true">
+      <c:bind-xml name="value-column-name" node="attribute"/>
+    </c:field>
+    <c:field name="keyTypeColumnName" type="string" required="false">
+      <c:bind-xml name="key-type-column-name" node="attribute"/>
+    </c:field>
+    <c:field name="useSourceOrder" type="boolean" required="true">
+      <c:bind-xml name="use-source-order" node="attribute"/>
+    </c:field>
+  </c:class>
+
+  <!-- regexp dictionary -->
+  <c:class name="hu.sztaki.ilab.longneck.process.block.RegexpDictionary">
+    <c:map-to xml="regexp-dictionary" ns-uri="urn:hu.sztaki.ilab.longneck:1.0"/>
+    <c:field name="dictionary" type="hu.sztaki.ilab.longneck.process.block.Dictionary" required="true">
+      <c:bind-xml auto-naming="deriveByClass" node="element"/>
+    </c:field>
+  </c:class>
+
+</c:mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>longneck-lookup changelog</title>
+    <author email="modras@ilab.sztaki.hu">Molnár András</author>
+  </properties>
+  <body>
+    <release version="1.5.2" date="2013-03-26" description="Update">
+      <action dev="tnemeth" type="update">
+        Update to longneck-core 1.7
+      </action>
+    </release>
+  </body>
+</document>
