@@ -4,7 +4,7 @@
           xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
   <properties>
     <title>longneck-lookup changelog</title>
-    <author email="modras@ilab.sztaki.hu">Molnár András</author>
+    <author email="modras@sztaki.mta.hu">Molnár András</author>
   </properties>
   <body>
     <release version="1.5.2" date="2013-03-26" description="Update">
