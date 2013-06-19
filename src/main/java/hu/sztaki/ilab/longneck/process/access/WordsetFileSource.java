@@ -3,7 +3,6 @@ package hu.sztaki.ilab.longneck.process.access;
 import hu.sztaki.ilab.longneck.Field;
 import hu.sztaki.ilab.longneck.Record;
 import hu.sztaki.ilab.longneck.RecordImpl;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,12 +12,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.apache.log4j.Logger;
 
 /**
- * Source that reads value from files.
- * The file format is new line separated ('\n'). One line is one filed.
+ * Source of words set is file.
+ * One line is one value.
  *
  */
 public class WordsetFileSource implements Source {

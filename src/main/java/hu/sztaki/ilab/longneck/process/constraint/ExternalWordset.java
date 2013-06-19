@@ -3,12 +3,11 @@ package hu.sztaki.ilab.longneck.process.constraint;
 import hu.sztaki.ilab.longneck.Record;
 import hu.sztaki.ilab.longneck.process.access.NoMoreRecordsException;
 import hu.sztaki.ilab.longneck.process.access.Source;
-
 import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Set of word from external source like xml file of world.
+ * Set of words from external source. E.g. xml file.
  * 
  * @author modras
  */
@@ -39,7 +38,7 @@ public class ExternalWordset implements Wordset {
     }
 
     protected void readWords() {
-        // read and construct words on-demand from source:
+        // On-demand read and construct words from source
         words = new TreeSet<String>();
         try {
             for (;;) {

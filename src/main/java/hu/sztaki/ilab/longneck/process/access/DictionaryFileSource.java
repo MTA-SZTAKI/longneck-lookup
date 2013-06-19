@@ -24,7 +24,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * Source that reads key-value dictionary XML files
+ * Read key-value dictionary XML file
  *  
  * @author Bendig Loránd <lbendig@ilab.sztaki.hu>
  *

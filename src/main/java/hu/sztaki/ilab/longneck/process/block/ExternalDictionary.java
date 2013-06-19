@@ -18,7 +18,7 @@ import java.util.TreeSet;
 import org.apache.commons.lang.StringUtils;
 
 /**
- *  A dictionary, set of word pair from external source like xml file.
+ *  Read the set of pair of words from external source. The file format is xml.
  *
  * @author modras
  */
@@ -34,7 +34,7 @@ public class ExternalDictionary implements Dictionary {
 
     protected String valueColumnName;
 
-    /** If true use the source order as is instead of DictItem key order. */
+    /** If true then use the source order as is instead of DictItem key order. */
     private boolean useSourceOrder;
 
     public void init() {
@@ -84,7 +84,7 @@ public class ExternalDictionary implements Dictionary {
     public ExternalDictionary () { }
 
     private void readItems() {
-        // read and construct items on-demand from source:
+        // On-demand read and construct items from source
         itemMap = useSourceOrder ? new LinkedHashMap<String, DictItem>()
             : new TreeMap<String, DictItem>();
         try {

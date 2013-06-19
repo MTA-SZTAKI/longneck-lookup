@@ -5,7 +5,6 @@ import hu.sztaki.ilab.longneck.Record;
 import hu.sztaki.ilab.longneck.process.AbstractSourceInfoContainer;
 import hu.sztaki.ilab.longneck.process.CheckError;
 import hu.sztaki.ilab.longneck.process.VariableSpace;
-import hu.sztaki.ilab.longneck.util.BlockUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +14,7 @@ import org.apache.commons.collections.map.LRUMap;
  */
 public class TranslateCache extends AbstractSourceInfoContainer implements AtomicBlock {
 
-    private int size = 100; //default size if not set
+    private int size = 100; //default size of cache
 
     private Translate translate;
 

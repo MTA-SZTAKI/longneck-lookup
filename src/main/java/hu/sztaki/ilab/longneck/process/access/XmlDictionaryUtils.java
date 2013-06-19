@@ -6,9 +6,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
 import longneck.ilab.sztaki.hu._1.DictionaryElements;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Class that represents a dictionary key with the attribute 'regexp', i.e:
+ * Class that represents a dictionary key with the attribute 'regexp', i.e.
  * <br>
  * {@code <key regexp="true">(.*)</key> }
  *
@@ -18,7 +18,7 @@ public class KeyType implements Cloneable{
 
     private boolean regexp;
 
-    /** If key is of type regexp its pattern is compiled */ 
+    /** If the key is regexp then pattern have to be compiled */
     private Pattern compiledKey;
 
     public KeyType() {}

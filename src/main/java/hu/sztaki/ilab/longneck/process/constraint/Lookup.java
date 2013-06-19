@@ -2,7 +2,7 @@ package hu.sztaki.ilab.longneck.process.constraint;
 
 import hu.sztaki.ilab.longneck.Record;
 import hu.sztaki.ilab.longneck.process.VariableSpace;
-import hu.sztaki.ilab.longneck.util.BlockUtils;
+import hu.sztaki.ilab.longneck.process.block.BlockUtils;
 import java.util.ArrayList;
 import java.util.List;
 
