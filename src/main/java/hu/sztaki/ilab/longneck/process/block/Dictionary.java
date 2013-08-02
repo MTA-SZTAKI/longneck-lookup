@@ -6,7 +6,7 @@ package hu.sztaki.ilab.longneck.process.block;
  * @author modras
  */
 public interface Dictionary extends Cloneable {
-    /** Translate the given string from the dictionary if it is contain the string. */
+    /** Translate the given string from the dictionary. */
     public String translate(String s);
 
     public Iterable<DictItem> getItems();

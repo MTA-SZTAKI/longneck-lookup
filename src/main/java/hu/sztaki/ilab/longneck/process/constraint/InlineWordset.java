@@ -3,8 +3,7 @@ package hu.sztaki.ilab.longneck.process.constraint;
 import java.util.TreeSet;
 
 /**
- * Set of word which was been given inline the the lookup constraint.
- * Not from an external source like xml file.
+ * Set of words which is given inline in the lookup constraint.
  * 
  * Example:
  * <inline-wordset>

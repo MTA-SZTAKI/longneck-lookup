@@ -8,14 +8,14 @@ import java.util.Set;
  */
 public interface Wordset extends Cloneable{
      /**
-     * Return if the given string is represented in the wordset.
+     * Check if the given string is represented in the wordset.
      * 
      * @param s the searching string.
-     * @return true if the string is represent in the wordset, false otherwise.
+     * @return true if the string is represented in the wordset, false otherwise.
      */
     public boolean contains(String s);
 
-    /** Give back the whole worldset. */
+    /** Give back the whole wordset. */
     public Set<String> getWords();
 
     public Wordset clone();

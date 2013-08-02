@@ -6,12 +6,12 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
- * The dictionary is treated as a dictionary with a regexp key.
- * The key is matched against the translated string.
- * If the key is not a regexp, it see the containing of the string.
- * Elsewhere, if it don't give a hit, return null.
+ * The dictionary is treated as a dictionary with regex key.
+ * The key regex is matched against the translated string.
+ * If key is not a regular expression, then it sees the containing of the string.
+ * Otherwise, if it don't give a hit, return null.
  * 
- * Note: elemets order is important! Because the first hit will return.
+ * Note: elements order is important! Return with the _first_ hit.
  * 
  * @author modras
  */
@@ -51,7 +51,7 @@ public class RegexpDictionary implements Dictionary {
             return null;
         }
 
-        // multi-pattern matching:
+        // multi-pattern matching
         for (java.util.Map.Entry<String, DictItem> e : getCompiledDict().entrySet()) {
 
             DictItem compiledDictItem = e.getValue();
@@ -63,7 +63,7 @@ public class RegexpDictionary implements Dictionary {
                     return compiledDictItem == null ? null : compiledDictItem.getValue();
                 }
             }
-            // match against regex
+            // s (string) match against regex
             else {
                 if (Pattern.matches(compiledKey.pattern(), s)) {
                     return Pattern.compile(compiledKey.pattern()).matcher(s).replaceFirst(

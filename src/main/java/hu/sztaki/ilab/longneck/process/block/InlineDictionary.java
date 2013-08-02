@@ -8,8 +8,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
- * A dictionary, set of word pair, which was been given inline..
- * Not from an external source like xml file.
+ * Inline dictionary, set of pair of words.
  * <br>
  * Example:
  * <inline-dictionary>
