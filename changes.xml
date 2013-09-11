@@ -6,6 +6,6 @@
     <title>longneck-lookup changelog</title>
   </properties>
   <body>
-
+    <release version="1.5.2" date="2013-09-11" description="Initial GitHub release."/>
   </body>
 </document>
