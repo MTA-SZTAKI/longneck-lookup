@@ -57,7 +57,7 @@ public class TranslateCache extends AbstractSourceInfoContainer implements Atomi
         Field f = getCacheElement(key);
         if (f == null) {
             translate.apply(record, parentScope);
-            putCacheElement(key, record.get(applyToName));
+            putCacheElement(key, new Field(record.get(applyToName)));
         }
         else {
             for (String fName : translate.getApplyTo()) {
